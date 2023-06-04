@@ -1,0 +1,35 @@
+syntax = "proto3";
+package user_service;
+option go_package = "./user_service/service";
+
+message CreateUserRequest {
+  uint32 id = 1;
+  string username = 2;
+  string Name = 3;
+  string Surname = 4;
+  string Location = 5;
+  string Bio = 6;
+}
+
+message UpdateUserRequest {
+  uint32 id = 1;
+  optional string username = 2;
+  optional string Name = 3;
+  optional string Surname = 4;
+  optional string Location = 5;
+  optional string Bio = 6;
+}
+
+message DeleteUserRequest {
+  uint32 id = 1;
+}
+
+message Response {
+  bool success = 1;
+}
+
+service userService {
+  rpc createUser(CreateUserRequest) returns (Response) {};
+  rpc updateUser(UpdateUserRequest) returns (Response) {};
+  rpc deleteUser(DeleteUserRequest) returns (Response) {};
+}
