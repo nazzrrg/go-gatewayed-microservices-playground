@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  auth_db:
+    container_name: auth_db
+    image: postgres:14.5
+    restart: on-failure
+    env_file:
+      - ./.env
+    volumes:
+      - auth_pg:/var/lib/postgresql
+    expose:
+      - 5432
+    networks:
+      - container_network
+  gateway:
+    build: ./gateway
+    restart: always
+    ports:
+      - "80:3000"
+    volumes:
+      - go_modules:/go/pkg/mod
+    env_file:
+      - ./.env
+    networks:
+      - container_network
+    depends_on:
+      - auth_db
+    command: ./gateway
+
+volumes:
+  auth_pg:
+  go_modules:
+
+networks:
+  container_network:
