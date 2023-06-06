@@ -9,4 +9,3 @@ RUN CGO_ENABLED=0 GOOS=linux go build github.com/nazzrrg/go-gatewayed-microservi
 
 FROM scratch as app
 COPY --from=build /app/gateway ./gateway
-EXPOSE $HTTP_PORT
