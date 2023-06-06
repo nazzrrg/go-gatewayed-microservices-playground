@@ -26,7 +26,20 @@ services:
       - container_network
     depends_on:
       - auth_db
+      - user_service
     command: ./gateway
+  user_service:
+    build: ./user_service
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - go_modules:/go/pkg/mod
+    env_file:
+      - ./.env
+    networks:
+      - container_network
+    command: ./user_service
 
 volumes:
   auth_pg:
