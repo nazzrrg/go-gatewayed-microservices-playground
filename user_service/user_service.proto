@@ -1,6 +1,5 @@
 syntax = "proto3";
-package user_service;
-option go_package = "./user_service/service";
+option go_package = "./service";
 
 message CreateUserRequest {
   uint32 id = 1;
